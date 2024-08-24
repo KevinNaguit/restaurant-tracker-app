@@ -3,15 +3,24 @@ import {
   Routes as Switch,
   Route,
 } from "react-router-dom";
+import GlobalStyles from "./GlobalStyles.js";
+import SignUp from "./pages/SignUp.js";
+import Login from "./pages/Login.js/index.js";
+import Dashboard from "./pages/Dashboard.js/index.js";
 
 const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" element={<h1>Welcome to My React App</h1>} />
-        <Route path="/*" element={<h1>Page Not Found</h1>} />
-      </Switch>
-    </Router>
+    <>
+      <GlobalStyles />
+      <Router>
+        <Switch>
+          <Route path="/" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/*" element={<h1>Page Not Found</h1>} />
+        </Switch>
+      </Router>
+    </>
   );
 };
 

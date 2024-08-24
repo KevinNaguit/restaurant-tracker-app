@@ -17,6 +17,7 @@ const {
   createUser,
   updateUserById,
   deleteUserById,
+  loginUser,
 } = require("./handlers");
 
 // Middleware to attach db to req
@@ -37,23 +38,27 @@ client
     console.error("Failed to connect to MongoDB:", error.message);
   });
 
-// Route to get a user by id
+// Route to get a user by their id
 app.get("/users/:userId", getUserById);
 
 // Route to create a new user
 app.post("/users", createUser);
 
-// Route to update a user by id
+// Route to update a user's information by their id
 app.put("/users/:userId", updateUserById);
 
-// Route to delete a user by id
+// Route to delete a user by their id
 app.delete("/users/:userId", deleteUserById);
+
+// Route for user login
+app.post("/login", loginUser);
 
 // Test route to verify connection
 // app.get("/test", (req, res) => {
 //   res.send("Hello from the backend");
 // });
 
+// Catch-all route for any undefined endpoints
 app.get("/*", (req, res) => {
   res.send("This isn't the endpoint you're looking for");
 });
