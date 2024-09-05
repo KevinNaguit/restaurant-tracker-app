@@ -1,6 +1,5 @@
 const express = require("express");
 const morgan = require("morgan");
-const { MongoClient } = require("mongodb");
 require("dotenv").config();
 
 const { MONGO_URI } = process.env;
@@ -10,57 +9,38 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 
-const client = new MongoClient(MONGO_URI);
-
+// Import route handlers for users, restaurants and tags
+const { getUserById, createUser, loginUser } = require("./handlers/users");
 const {
-  getUserById,
-  createUser,
-  updateUserById,
-  deleteUserById,
-  loginUser,
-} = require("./handlers");
+  getRestaurantsByUserId,
+  createRestaurant,
+  deleteRestaurant,
+  moveRestaurantToList,
+} = require("./handlers/restaurants");
+const { getTagsByUserId, createTag, deleteTag } = require("./handlers/tags");
 
-// Middleware to attach db to req
-app.use((req, res, next) => {
-  req.db = db; // Attach db to request object
-  next();
-});
-
-// Connect to MongoDB
-client
-  .connect()
-  .then(() => {
-    console.log("Connected to MongoDB");
-    db = client.db("restaurantApp");
-    app.locals.db = db; // Make the db available to all route handlers through app.locals
-  })
-  .catch((error) => {
-    console.error("Failed to connect to MongoDB:", error.message);
-  });
-
-// Route to get a user by their id
+// User routes
 app.get("/users/:userId", getUserById);
-
-// Route to create a new user
-app.post("/users", createUser);
-
-// Route to update a user's information by their id
-app.put("/users/:userId", updateUserById);
-
-// Route to delete a user by their id
-app.delete("/users/:userId", deleteUserById);
-
-// Route for user login
+app.post("/newUser", createUser);
 app.post("/login", loginUser);
 
-// Test route to verify connection
-// app.get("/test", (req, res) => {
-//   res.send("Hello from the backend");
-// });
+// Restaurants routes
+app.get("/restaurants/:userId", getRestaurantsByUserId);
+app.post("/restaurants", createRestaurant);
+app.delete("/restaurants", deleteRestaurant);
+app.post("/restaurants/move", moveRestaurantToList);
 
-// Catch-all route for any undefined endpoints
+// Tags routes
+app.get("/tags/:userId", getTagsByUserId);
+app.post("/tags", createTag);
+app.delete("/tags/:id", deleteTag);
+
+// Catch-all route for undefined endpoints
 app.get("/*", (req, res) => {
-  res.send("This isn't the endpoint you're looking for");
+  res.status(404).json({
+    status: 404,
+    message: "This isn't the endpoint you're looking for",
+  });
 });
 
 app.listen(PORT, () => {
