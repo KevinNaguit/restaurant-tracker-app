@@ -5,10 +5,10 @@ This project was developed as part of the Web Development Diploma program at Con
 ## Features
 
 **User Accounts:**
-Sign up or log in to save your restaurants privately.
+- Sign up or log in to save your restaurants privately.
 
 **Dashboard:**
-- Access your main hub with three sections:
+- Access your main hub with three sections
 - Favourites: Restaurants you love.
 - Want to Try: Restaurants you plan to visit.
 - Tags: Organize restaurants with tags like "Sushi" or "Italian".
