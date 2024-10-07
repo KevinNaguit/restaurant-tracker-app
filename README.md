@@ -36,7 +36,7 @@ A future update will add Search and Filter options for easy browsing based on ta
 
 ## Screenshots
 
-Here are some screenshots to give you an idea of how to the app works. These show key parts of the user experience, including signing up/logging in, managing restaurants lists and adding new restaurants.
+Here are some screenshots to give you an idea of how to the app works. These show key parts of the user experience, including signing up/logging in, managing restaurant lists and adding new restaurants.
 
 <img width="1436" alt="Sign Up page" src="https://github.com/user-attachments/assets/3c1e6c31-2e93-4674-94b7-f63d99d073f5">
 <img width="1436" alt="Log In page" src="https://github.com/user-attachments/assets/c07afc4f-7802-4af0-856f-f238c2f1c05b">
